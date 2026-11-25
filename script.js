@@ -1,8 +1,8 @@
-// ---------- 1. Locations (Gujar Khan, Rawalpindi District) ----------
+// ---------- 1. Locations (3 districts near hometown Gujar Khan) ----------
 const LOCATIONS = [
-  { name: 'Gujar Khan',    tag: 'Hometown · Tehsil HQ', lat: 33.2533, lon: 73.3033 },
-  { name: 'Kallar Syedan', tag: 'Northern Tehsil',      lat: 33.3978, lon: 73.3772 },
-  { name: 'Murree',        tag: 'Hill Station',         lat: 33.9062, lon: 73.3903 }
+  { name: 'Rawalpindi', short: 'RAWALPINDI', tag: 'District Rawalpindi · Home district of Gujar Khan', lat: 33.5651, lon: 73.0169 },
+  { name: 'Murree',     short: 'MURREE',     tag: 'District Murree · Hill district',                  lat: 33.9062, lon: 73.3903 },
+  { name: 'Jhelum',     short: 'JHELUM',     tag: 'District Jhelum · Neighbour of Gujar Khan',        lat: 32.9425, lon: 73.7257 }
 ];
 
 // ---------- 2. Open-Meteo API URL (one request, 3 locations) ----------
@@ -79,7 +79,7 @@ const map = new ol.Map({
   target: 'map',
   layers: [baseLayers.sat, baseLayers.street, baseLayers.dark],
   view: new ol.View({
-    center: ol.proj.fromLonLat([73.35, 33.55]),
+    center: ol.proj.fromLonLat([73.38, 33.47]),
     zoom: 9
   })
 });
@@ -98,7 +98,7 @@ function fitAll(animated = true) {
   const extent = ol.extent.boundingExtent(coords);
   const small = window.innerWidth <= 768;
   map.getView().fit(extent, {
-    padding: small ? [130, 40, 290, 40] : [130, 400, 130, 60],
+    padding: small ? [130, 40, 290, 40] : [130, 400, 130, 220],
     duration: animated ? 1200 : 0,
     maxZoom: 11
   });
@@ -170,7 +170,7 @@ function render(data) {
     el.className = 'marker';
     el.style.setProperty('--c', c.color);
     el.style.setProperty('--p', gaugePercent(w.temp));
-    el.innerHTML = `<div class="inner"><b>${Math.round(w.temp)}°</b><small>${loc.name.split(' ')[0].toUpperCase()}</small></div>`;
+    el.innerHTML = `<div class="inner"><b>${Math.round(w.temp)}°</b><small>${loc.short}</small></div>`;
     el.addEventListener('click', (e) => { e.stopPropagation(); openPopup(loc, w); });
 
     const overlay = new ol.Overlay({
