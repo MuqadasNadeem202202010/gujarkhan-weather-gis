@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gujar Khan Mini Environmental Monitoring Web GIS</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@9.2.4/ol.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Map -->
+  <div id="map"></div>
+  <div class="tint"></div>
+
+  <!-- Header -->
+  <header class="glass header">
+    <div class="logo">🌅</div>
+    <div>
+      <h1>Gujar Khan Weather GIS</h1>
+      <p>Live Environmental Monitoring · Rawalpindi District</p>
+    </div>
+  </header>
+
+  <!-- Side Panel -->
+  <aside class="glass panel" id="panel">
+    <div class="panel-top">
+      <h2>Live Stations</h2>
+      <button id="refreshBtn" title="Refresh data">⟳ Refresh</button>
+    </div>
+
+    <div class="summary" id="summary"></div>
+
+    <div id="cards" class="cards">
+      <div class="loading">Loading weather data...</div>
+    </div>
+    <div class="updated" id="updated"></div>
+  </aside>
+
+  <!-- Basemap switcher -->
+  <div class="glass switcher" id="switcher">
+    <button data-layer="sat" class="active">🛰️ Satellite</button>
+    <button data-layer="street">🗺️ Street</button>
+    <button data-layer="dark">🌙 Dark</button>
+  </div>
+
+  <!-- Legend -->
+  <div class="glass legend">
+    <h3>Temperature Colours</h3>
+    <div class="legend-row"><span style="background:#6366f1"></span> Below 10°C · Very Cold</div>
+    <div class="legend-row"><span style="background:#0ea5e9"></span> 10 – 18°C · Cool</div>
+    <div class="legend-row"><span style="background:#10b981"></span> 18 – 25°C · Pleasant</div>
+    <div class="legend-row"><span style="background:#f59e0b"></span> 25 – 32°C · Warm</div>
+    <div class="legend-row"><span style="background:#f43f5e"></span> Above 32°C · Hot</div>
+  </div>
+
+  <!-- API URL box -->
+  <div class="glass apibox">
+    <strong>API Request URL</strong>
+    <code id="apiUrl"></code>
+    <button id="copyBtn">Copy</button>
+  </div>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <button class="popup-close" id="popupClose">×</button>
+    <div id="popupContent"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ol@9.2.4/dist/ol.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
